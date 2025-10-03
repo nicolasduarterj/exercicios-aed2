@@ -89,6 +89,12 @@ node_t *sucessor(node_t *atual)
     return atual;
 }
 
+/* Esse método é mais simples que o dos slides, pois
+ * em vez de manipular o pai, ele manipula diretamente
+ * o endereço de memória que aponta para o filho a ser
+ * removido no pai. Ademais, consideramos não fazer nada quando
+ * valor não existe na árvore como sendo equivalente a deletar
+ * ele com sucesso. */
 int remover(node_t **p_arv, int valor)
 {
     node_t *substituto, *no_sucessor, *arv;
@@ -103,7 +109,7 @@ int remover(node_t **p_arv, int valor)
     if (valor < arv->chave)
         return remover(&(arv->esq), valor);
 
-    /* arv->chave == valor */
+    /* Podemos assumir, a partir daqui, que arv->chave == valor. */
 
     if (arv->esq == NULL)
     {
@@ -135,6 +141,7 @@ void percorrer_em_ordem(node_t *arv)
     percorrer_em_ordem(arv->esq);
     printf("%d ", arv->chave);
     percorrer_em_ordem(arv->dir);
+    return;
 }
 
 void percorrer_pre_ordem(node_t *arv)
@@ -145,6 +152,7 @@ void percorrer_pre_ordem(node_t *arv)
     printf("%d ", arv->chave);
     percorrer_pre_ordem(arv->esq);
     percorrer_pre_ordem(arv->dir);
+    return;
 }
 
 void percorrer_pos_ordem(node_t *arv)
@@ -155,4 +163,5 @@ void percorrer_pos_ordem(node_t *arv)
     percorrer_pos_ordem(arv->esq);
     percorrer_pos_ordem(arv->dir);
     printf("%d ", arv->chave);
+    return;
 }
