@@ -3,9 +3,6 @@
 
 #include "arvore_binaria.h"
 
-int remover_com_um_filho(node_t **p_arv, int valor);
-int remover_com_dois_filhos(node_t **p_arv, int valor);
-
 node_t *cria_no(int chave)
 {
     node_t *no;
@@ -39,32 +36,32 @@ int inserir(node_t **p_arv, int valor)
     if (arvore_e_vazia(*p_arv))
     {
         *p_arv = novo_no;
-        return 1;
+        return SUCESSO_INSERCAO;
     }
     /*-----------[Igual]-------------------*/
     if (raiz->chave == valor)
-        return -1;
+        return JA_INSERIDO;
     /*-----------[Menor]-------------------*/
     if (valor < raiz->chave)
     {
         if (raiz->esq == NULL)
         {
             raiz->esq = novo_no;
-            return 3;
+            return SUCESSO_INSERCAO;
         }
 
         inserir(&(raiz->esq), valor);
-        return 4;
+        return SUCESSO_INSERCAO;
     }
     /*-----------[Maior]--------------------*/
     if (raiz->dir == NULL)
     {
         raiz->dir = novo_no;
-        return 5;
+        return SUCESSO_INSERCAO;
     }
 
     inserir(&(raiz->dir), valor);
-    return 6;
+    return SUCESSO_INSERCAO;
 }
 
 node_t *busca(node_t *arv, int valor)
